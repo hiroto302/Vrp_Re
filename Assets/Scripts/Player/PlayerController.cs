@@ -33,6 +33,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Transform moveTarget = null;
 
+    // SE 足音
+    [SerializeField]
+    SE se = null;
+    private float elapsedTime = 0; // 経過時間
+
+
     // 列挙体
     // Playerの状態
     public enum State
@@ -53,6 +59,7 @@ public class PlayerController : MonoBehaviour
         {
             moveTarget = GetComponentInChildren<OVRCameraRig>().transform.Find("TrackingSpace/CenterEyeAnchor");
         }
+        se = transform.Find("PlayerFoot").GetComponent<SE>();
     }
 
     void Update()
@@ -69,6 +76,35 @@ public class PlayerController : MonoBehaviour
             y = rightStick.y;
             move = (x * moveTarget.right.normalized + y * moveTarget.forward.normalized) * moveSpeed * speedMultiplier;
             transform.Translate(move, Space.World);
+
+            // 足音
+            if(Mathf.Abs(x) > 0.8f || Mathf.Abs(y) > 0.8f)
+            {
+                elapsedTime += Time.deltaTime;
+                if(elapsedTime > 0.8f)
+                {
+                    se.PlaySE(0, 0.5f);
+                    elapsedTime = 0;
+                }
+            }
+            else if(Mathf.Abs(x) > 0.5f || Mathf.Abs(y) > 0.5f)
+            {
+                elapsedTime += Time.deltaTime;
+                if(elapsedTime > 1.0f)
+                {
+                    se.PlaySE(0, 0.4f);
+                    elapsedTime = 0;
+                }
+            }
+            else if(Mathf.Abs(x) > 0.1f || Mathf.Abs(y) > 0.1f)
+            {
+                elapsedTime += Time.deltaTime;
+                if(elapsedTime > 1.5f)
+                {
+                    se.PlaySE(2, 0.3f);
+                    elapsedTime = 0;
+                }
+            }
         }
 
     }
