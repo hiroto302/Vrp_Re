@@ -53,7 +53,7 @@ public class Message : MonoBehaviour
         clickIcon.enabled = false;
         // textの取得
         messageText = transform.Find("MessagePanel/Text").GetComponent<Text>();
-        messageText = "";
+        messageText.text = "";
         // Panel 非表示
         transform.GetChild(0).gameObject.SetActive(false);
     }
@@ -71,7 +71,7 @@ public class Message : MonoBehaviour
             {
                 isStartMessage = false;
                 MessageEnd();
-                retrun;
+                return;
             }
             // allMessageを分割した一つのmessageが、全ての文字列を表示しきれていない時
             if (!isOneMessage)
@@ -122,7 +122,7 @@ public class Message : MonoBehaviour
                     if (messageNum >= splitMessage.Length)
                     {
                         isEndMessage = true;
-                        transfrom.GetChild(0).gameObject.SetActive(false);
+                        transform.GetChild(0).gameObject.SetActive(false);
                     }
                 }
             }
@@ -151,7 +151,7 @@ public class Message : MonoBehaviour
     public void SetMessagePanel(string message)
     {
         SetMessage(message);
-        transfrom.GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(0).gameObject.SetActive(true);
     }
 
     // 下記の2つの処理は、このクラスを継承したもので,メッセージ開始と終わり時に行いたい処理を記述する
