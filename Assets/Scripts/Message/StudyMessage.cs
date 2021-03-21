@@ -46,6 +46,7 @@ public class StudyMessage : MonoBehaviour
     public bool isStartMessage = false;
 
     private int[] arrayTest = {123, 456, 789};
+    int ch;
     void Start()
     {
         // クリックアイコンの取得
@@ -62,15 +63,20 @@ public class StudyMessage : MonoBehaviour
         allMessage = "abccc<>def<>ghi";
         splitMessage = Regex.Split(allMessage, @"\s*" + splitString + @"\s*", RegexOptions.IgnorePatternWhitespace);
         messageNum = 0;
-        messageText.text += splitMessage[0][0];
+        // messageText.text += splitMessage[0][0];
         // messageText.text += splitMessage[1][0];
         // messageText.text += (splitMessage[0][0] + splitMessage[1][0]);
-        messageText.text += splitMessage[0].Substring(1);
+        // messageText.text += splitMessage[0].Substring(1);
         // MessageStart();
+        // int ch = allMessage[0] + allMessage[3]; // ある文字列からインデックスで指定した同士の足し算 char型 + char型 = 数字(Int32)
+        messageText.text = allMessage[0].ToString() + allMessage[3].ToString(); // char型を文字列に変換
     }
     void Update()
     {
-        Debug.Log(splitMessage[0].Substring(1));
+        // Debug.Log(splitMessage[0].Substring(1));
+        // Debug.Log("a" + allMessage[3]);           // ある文字列からインデックスで指定した文字と、別の文字列の足し算は可能 string型 + char型 = 文字列
+        Debug.Log((allMessage[0].ToString() + allMessage[3].ToString()).GetType()); 
+        // Debug.Log(allMessage[3].GetType()); //char型
         // 会話フラグ
         if(!isStartMessage)
         {
