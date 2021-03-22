@@ -75,7 +75,7 @@ public class StudyMessage : MonoBehaviour
     {
         // Debug.Log(splitMessage[0].Substring(1));
         // Debug.Log("a" + allMessage[3]);           // ある文字列からインデックスで指定した文字と、別の文字列の足し算は可能 string型 + char型 = 文字列
-        Debug.Log((allMessage[0].ToString() + allMessage[3].ToString()).GetType()); 
+        // Debug.Log((allMessage[0].ToString() + allMessage[3].ToString()).GetType()); 
         // Debug.Log(allMessage[3].GetType()); //char型
         // 会話フラグ
         if(!isStartMessage)
